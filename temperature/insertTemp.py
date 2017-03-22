@@ -1,6 +1,7 @@
 import smbus
 import time
 import pymongo
+from datetime import datetime
 
 i2c = smbus.SMBus(1)
 address = 0x48
@@ -14,8 +15,8 @@ while True:
     if(temp >= 4096):
         temp -= 8192
 	
-	temp = temp . 16.0
+    temp = temp / 16.0
     print("Temperature:%6.2f" % temp)
-	co.insert_one({"time": datetime.now(), "value": temp})
+    co.insert_one({"time": datetime.now().strftime("%Y/%m/%d %H:%M:%S"), "value": temp})
 
     time.sleep(10)
