@@ -13,11 +13,12 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
     python -m pip install pymongo==3.0.3
 
-RUN git clone https://github.com/t-matuda/raspi.git
+RUN apt-get install -y vim
+
+RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+ADD insertTemp.py /data/ 
 
 # Define default command.
-#CMD ["", "python", "raspi/temperature/insertTemp.py"]
+CMD ["python", "insertTemp.py"]
 #CMD ["bash"]
-#CMD mongod --fork --logpath /data/db/mongod.log --repair && python raspi/temperature/insertTemp.py
-CMD mongod && bash
-
