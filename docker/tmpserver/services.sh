@@ -1,3 +1,3 @@
 #!/bin/bash
-mongod --fork --logpath /data/db/mongod.log --repair
-python raspi/temperature/insertTemp.py
+sudo mongod --fork --logpath /data/db/mongod.log --repair
+sudo python raspi/temperature/insertTemp.py
