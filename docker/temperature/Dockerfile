@@ -14,11 +14,14 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && \
     python -m pip install pymongo==3.0.3
 
 RUN apt-get install -y vim
+RUN apt-get install -y supervisor
 
 RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 ADD insertTemp.py /data/ 
+ADD temperature.conf /etc/
 
 # Define default command.
-CMD ["python", "insertTemp.py"]
+CMD /usr/bin/supervisord -c /etc/temperature.conf
+#CMD ["python", "insertTemp.py"]
 #CMD ["bash"]
